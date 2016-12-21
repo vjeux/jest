@@ -699,13 +699,7 @@ class Runtime {
       doMock: mock,
       dontMock: unmock,
       enableAutomock,
-      fn: (impl: ?Function) => {
-        const fn = this._moduleMocker.getMockFunction();
-        if (impl) {
-          return fn.mockImplementation(impl);
-        }
-        return fn;
-      },
+      fn: this._moduleMocker.getMockFunction.bind(this._moduleMocker),
       genMockFn: this._moduleMocker.getMockFunction.bind(this._moduleMocker),
       genMockFromModule:
         (moduleName: string) => this._generateMock(from, moduleName),

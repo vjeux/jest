@@ -550,12 +550,21 @@ class ModuleMocker {
   /**
    * @see README.md
    */
-  getMockFunction(): any {
-    return this._makeComponent({type: 'function'});
+  getMockFunction(impl: ?Function): any {
+    const fn = this._makeComponent({type: 'function'});
+    if (impl) {
+      return fn.mockImplementation(impl);
+    }
+    return fn;
   }
 
   // Just a short-hand alias
   getMockFn(): any {
+    return this.getMockFunction();
+  }
+
+  // Just a short-finger alias
+  fn(): any {
     return this.getMockFunction();
   }
 
